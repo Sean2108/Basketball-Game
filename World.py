@@ -8,7 +8,7 @@ class World:
     def __init__(self):
         self.ball = Ball2D('disk-blue.png', 15, 0.1).set_pos([30,30])
         self.rim = []
-        self.e = 1.15 # Coefficient of restitution
+        self.e = 1. # Coefficient of restitution
         self.shot = False
         self.p1score = 0
         self.p2score = 0

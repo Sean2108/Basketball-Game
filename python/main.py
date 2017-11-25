@@ -32,7 +32,7 @@ def main():
 
     while True:
         # 100 fps
-        clock.tick(300)
+        clock.tick(60)
 
         # Clear the background, and draw the sprites
         screen.fill(WHITE)

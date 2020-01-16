@@ -8,9 +8,10 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
+
 def main():
 
-   # initializing pygame
+    # initializing pygame
     pygame.init()
 
     clock = pygame.time.Clock()
@@ -19,15 +20,15 @@ def main():
     win_width = 1280
     win_height = 640
     screen = pygame.display.set_mode((win_width, win_height))
-    pygame.display.set_caption('Basketball')
+    pygame.display.set_caption("Basketball")
 
     world = World()
     power = PowerBar()
     scoreboard = Text()
-    
-    world.add_rim('disk-red.png', 5).set_pos([1000, 300])
-    world.add_rim('disk-red.png', 5).set_pos([1075, 300])
-    
+
+    world.add_rim("disk-red.png", 5).set_pos([1000, 300])
+    world.add_rim("disk-red.png", 5).set_pos([1075, 300])
+
     dt = 0.1
 
     while True:
@@ -38,7 +39,7 @@ def main():
         screen.fill(WHITE)
         power.draw(screen)
         world.draw(screen)
-        pygame.draw.arc(screen, RED, (50,50,50,50), 1, 1, 10)
+        pygame.draw.arc(screen, RED, (50, 50, 50, 50), 1, 1, 10)
         # draw rim line
         pygame.draw.line(screen, RED, [1000, 340], [1075, 340], 10)
         # draw backboard
@@ -59,5 +60,6 @@ def main():
 
         pygame.display.update()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -1,12 +1,12 @@
 import pygame
 
+
 class Rim2D(pygame.sprite.Sprite):
-    
     def __init__(self, imgfile, radius):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load(imgfile)
-        self.image = pygame.transform.scale(self.image, (radius*2, radius*2)) 
+        self.image = pygame.transform.scale(self.image, (radius * 2, radius * 2))
         self.radius = radius
         self.state = [0, 0, 0, 0]
 
@@ -16,5 +16,5 @@ class Rim2D(pygame.sprite.Sprite):
 
     def draw(self, surface):
         rect = self.image.get_rect()
-        rect.center = (self.state[0], 640-self.state[1]) # Flipping y
+        rect.center = (self.state[0], 640 - self.state[1])  # Flipping y
         surface.blit(self.image, rect)

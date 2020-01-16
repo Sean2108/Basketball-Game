@@ -3,12 +3,12 @@ import numpy as np
 from Ball import Ball2D
 from Rim import Rim2D
 
-class World:
 
+class World:
     def __init__(self):
-        self.ball = Ball2D('disk-blue.png', 15, 0.1).set_pos([30,30])
+        self.ball = Ball2D("disk-blue.png", 15, 0.1).set_pos([30, 30])
         self.rim = []
-        self.e = 1. # Coefficient of restitution
+        self.e = 1.0  # Coefficient of restitution
         self.shot = False
         self.p1score = 0
         self.p2score = 0
@@ -17,11 +17,6 @@ class World:
         self.won = False
         self.shot_from = 30
 
-    def add(self, imgfile, radius, mass=1.0):
-        disk = Ball2D(imgfile, radius, mass)
-        self.balls.append(disk)
-        return disk
-
     def reset(self, power):
         self.shot = False
         if self.scored:
@@ -29,7 +24,7 @@ class World:
         self.scored = False
         self.p1turn = not self.p1turn
         # default position is 30, 30
-        self.ball = self.ball.set_pos([30,30])
+        self.ball = self.ball.set_pos([30, 30])
         self.shot_from = 30
         power.reset()
 
@@ -57,11 +52,19 @@ class World:
         self.check_for_collision()
         self.ball.update(dt)
         # ball is out of bounds -> reset
-        if self.ball.state[0] > 1280 + self.ball.radius or self.ball.state[1] < 0 - self.ball.radius:
+        if (
+            self.ball.state[0] > 1280 + self.ball.radius
+            or self.ball.state[1] < 0 - self.ball.radius
+        ):
             self.reset(power)
         # ball is in the rim -> scored
         top_of_ball = self.ball.state[1] + self.ball.radius
-        if self.ball.state[0] > 1000 and self.ball.state[0] < 1075 and top_of_ball > 295 and top_of_ball < 305:
+        if (
+            self.ball.state[0] > 1000
+            and self.ball.state[0] < 1075
+            and top_of_ball > 295
+            and top_of_ball < 305
+        ):
             self.scored = True
 
     def normalize(self, v):
@@ -71,7 +74,7 @@ class World:
         if self.check_backboard_collision():
             return
 
-        self.check_rim_collision()        
+        self.check_rim_collision()
 
     def check_backboard_collision(self):
         right_of_ball = self.ball.state[0] + self.ball.radius
@@ -92,9 +95,9 @@ class World:
     def check_rim_collision(self):
         pos_i = self.ball.state[0:2]
         for j in range(0, len(self.rim)):
-            
+
             pos_j = np.array(self.rim[j].state[0:2])
-            dist_ij = np.sqrt(np.sum((pos_i - pos_j)**2))
+            dist_ij = np.sqrt(np.sum((pos_i - pos_j) ** 2))
 
             radius_j = self.rim[j].radius
             if dist_ij > self.ball.radius + radius_j:
@@ -107,7 +110,7 @@ class World:
 
             mass_i = self.ball.mass
 
-            J = -(1+self.e) * np.dot(vel_i, n_ij) / ((1./mass_i + 1.))
+            J = -(1 + self.e) * np.dot(vel_i, n_ij) / ((1.0 / mass_i + 1.0))
 
             vel_i_aftercollision = vel_i + n_ij * J / mass_i
 

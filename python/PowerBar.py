@@ -4,6 +4,7 @@ from math import atan, radians, cos, sin
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
 
+
 class PowerBar:
     def __init__(self):
         self.power = 0
